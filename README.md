@@ -31,6 +31,7 @@ Implementation using C or pyhton code
 
 ## PROGRAM:
 PROGRAM:
+```c
 CaearCipher.
 #include <stdio.h>
 #include <stdlib.h>
@@ -83,7 +84,7 @@ int main() {
 
     return 0;
 }
-
+```
 ## OUTPUT:
 ![Screenshot 2024-09-04 102145](https://github.com/user-attachments/assets/b935666f-08e2-4e0c-a4ff-fb1060c09afd)
 
@@ -132,6 +133,7 @@ To decrypt, use the INVERSE (opposite) of the last 3 rules, and the 1st as-is (d
 
 
 ## PROGRAM:
+```c
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -341,6 +343,7 @@ int main() {
 
     return 0;
 }
+```
 
 ## OUTPUT:
 ![Screenshot 2024-09-04 102407](https://github.com/user-attachments/assets/094c8d46-7007-445a-a98e-957beaec87a5)
@@ -379,6 +382,7 @@ The cipher can, be adapted to an alphabet with any number of letters. All arithm
 
 
 ## PROGRAM:
+```c
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
@@ -477,6 +481,7 @@ int main() {
     printf("Decoded message : %s\n", dec);
     return 0;
 }
+```
 
 ## OUTPUT:
 ![Screenshot 2024-09-04 102537](https://github.com/user-attachments/assets/f4bf5998-39ec-49bf-828f-4f51bf5f7e6b)
@@ -513,6 +518,7 @@ The Vigenere cipher is a method of encrypting alphabetic text by using a series 
 
 
 ## PROGRAM:
+```c
 #include <stdio.h>
 #include <string.h>
 
@@ -573,6 +579,7 @@ int main() {
 
     return 0;
 }
+```
 
 ## OUTPUT:
 ![Screenshot 2024-09-04 102700](https://github.com/user-attachments/assets/ad038a52-122a-4d53-83f3-17f538b33ebe)
@@ -609,6 +616,7 @@ ALGORITHM DESCRIPTION:
 In the rail fence cipher, the plaintext is written downwards and diagonally on successive "rails" of an imaginary fence, then moving up when we reach the bottom rail. When we reach the top rail, the message is written downwards again until the whole plaintext is written out. The message is then read off in rows.
 
 ## PROGRAM:
+```c
 #include <stdio.h>
 #include <string.h>
 
@@ -655,6 +663,7 @@ int main() {
     printf("\n");
     return 0;
 }
+```
 ## OUTPUT:
 
 ## RESULT:

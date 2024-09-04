@@ -665,6 +665,8 @@ int main() {
 }
 ```
 ## OUTPUT:
+![Screenshot 2024-09-04 102852](https://github.com/user-attachments/assets/0956d862-393f-419f-a75b-4baf590b424c)
+
 
 ## RESULT:
 The program is executed successfully

@@ -619,52 +619,121 @@ In the rail fence cipher, the plaintext is written downwards and diagonally on s
 #include <stdio.h>
 #include <string.h>
 
-int main() {
-    int i, j, len, rails, count, dir;
-    char str[1000];
-    int code[100][1000] = {0};  // Initialize the entire array to 0
-
-    printf("Enter a Secret Message:\n");
-    gets(str);  
-    len = strlen(str);
-
-    printf("Enter number of rails:\n");
-    scanf("%d", &rails);
-
-    count = 0;
-    i = 0;
-    dir = 1;  
-
-    for (j = 0; j < len; j++) {
-        code[i][j] = str[j];
+// Function to encrypt using Rail Fence Cipher
+void encryptRailFence(char *plaintext, int key, char *ciphertext) {
+    int len = strlen(plaintext);
+    char rail[key][len];
+    
+    // Initialize the rail matrix
+    for (int i = 0; i < key; i++)
+        for (int j = 0; j < len; j++)
+            rail[i][j] = '\n';
+    
+    // To find the direction
+    int row = 0, col = 0;
+    int direction_down = 0;
+    
+    // Fill the rail matrix in a zigzag manner
+    for (int i = 0; i < len; i++) {
+        if (row == 0 || row == key - 1)
+            direction_down = !direction_down;
         
-        // Change direction if we reach the top or bottom rail
-        if (i == 0) {
-            dir = 1;
-        } else if (i == rails - 1) {
-            dir = -1;
-        }
-
-        i += dir;
+        rail[row][col++] = plaintext[i];
+        
+        if (direction_down)
+            row++;
+        else
+            row--;
     }
+    
+    // Read the characters row-wise to generate the ciphertext
+    int k = 0;
+    for (int i = 0; i < key; i++)
+        for (int j = 0; j < len; j++)
+            if (rail[i][j] != '\n')
+                ciphertext[k++] = rail[i][j];
+    
+    ciphertext[k] = '\0';
+}
 
-    printf("Encrypted Message:\n");
-
-    // Print the encrypted message
-    for (i = 0; i < rails; i++) {
-        for (j = 0; j < len; j++) {
-            if (code[i][j] != 0) {
-                printf("%c", code[i][j]);
-            }
-        }
+// Function to decrypt using Rail Fence Cipher
+void decryptRailFence(char *ciphertext, int key, char *decryptedText) {
+    int len = strlen(ciphertext);
+    char rail[key][len];
+    
+    // Initialize the rail matrix
+    for (int i = 0; i < key; i++)
+        for (int j = 0; j < len; j++)
+            rail[i][j] = '\n';
+    
+    // To find the direction
+    int row = 0, col = 0;
+    int direction_down = 0;
+    
+    // Mark the rail matrix for decryption
+    for (int i = 0; i < len; i++) {
+        if (row == 0 || row == key - 1)
+            direction_down = !direction_down;
+        
+        rail[row][col++] = '*';
+        
+        if (direction_down)
+            row++;
+        else
+            row--;
     }
+    
+    // Fill the rail matrix with the ciphertext
+    int k = 0;
+    for (int i = 0; i < key; i++)
+        for (int j = 0; j < len; j++)
+            if (rail[i][j] == '*' && k < len)
+                rail[i][j] = ciphertext[k++];
+    
+    // Read the matrix in a zigzag manner to decrypt the text
+    row = 0; col = 0;
+    direction_down = 0;
+    
+    for (int i = 0; i < len; i++) {
+        if (row == 0 || row == key - 1)
+            direction_down = !direction_down;
+        
+        decryptedText[i] = rail[row][col++];
+        
+        if (direction_down)
+            row++;
+        else
+            row--;
+    }
+    
+    decryptedText[len] = '\0';
+}
 
-    printf("\n");
+int main() {
+    char plaintext[100], ciphertext[100], decryptedText[100];
+    int key;
+    
+    printf("Enter the plaintext: ");
+    gets(plaintext);
+    
+    printf("Enter the key: ");
+    scanf("%d", &key);
+    
+    // Encryption
+    encryptRailFence(plaintext, key, ciphertext);
+    printf("Encrypted Text: %s\n", ciphertext);
+    
+    // Decryption
+    decryptRailFence(ciphertext, key, decryptedText);
+    printf("Decrypted Text: %s\n", decryptedText);
+    
     return 0;
 }
+
 ```
 ## OUTPUT:
-![Screenshot 2024-09-04 102852](https://github.com/user-attachments/assets/0956d862-393f-419f-a75b-4baf590b424c)
+![Screenshot 2024-09-05 090026](https://github.com/user-attachments/assets/55d0f2ab-b95f-4333-889a-0b94d151e440)
+
 
 
 ## RESULT:
